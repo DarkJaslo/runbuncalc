@@ -346,12 +346,18 @@ th {
 
 /* header */
 .move-result-group {
-    min-width: 50em;
-    margin: 1em 0 11.5em;
+    min-width: calc(50em + 160px);
+    margin: 1em 0 1em;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 160px minmax(0, 1fr);
+    align-items: start;
 }
 .move-result-subgroup {
-    float: left;
-    width: 50%;
+    min-width: 25em;
+}
+.move-result-divider {
+    width: 140px;
+    justify-self: center;
 }
 .move-result-group .btn {
     margin-right: 1em;
