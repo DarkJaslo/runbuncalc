@@ -1,23 +1,18 @@
-FROM node:12
-# Create app directory
-WORKDIR /usr/src/app/calc
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY calc/package*.json ./
-RUN npm install
+FROM node:20
 
 WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
 
-# Bundle app source
-
+# Copy the complete project, including tsconfig.json
 COPY . .
-RUN node build
+
+# Install dependencies
+# This triggers the subpkg postinstall process
+RUN npm install
+
+# Build the application (frontend + website)
+RUN npm run build
 
 EXPOSE 3000
-CMD [ "node", "server.js" ]
+
+CMD ["node", "server.js"]
